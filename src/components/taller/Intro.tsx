@@ -27,11 +27,12 @@ export function Intro({ onFinish }: IntroProps) {
         }
         if (i >= FRASE.length) {
           clearInterval(interval);
-          setTimeout(() => setFadeText(true), 2000);
-          setTimeout(() => {
-            setVisible(false);
-            onFinish();
-          }, 4200);
+          // Let the phrase breathe, then start a long cross-fade to the hero.
+          setTimeout(() => setFadeText(true), 2200);
+          // Reveal hero earlier so black overlay fades ON TOP of the image
+          setTimeout(() => onFinish(), 3600);
+          // Overlay itself unmounts after its own long fade completes
+          setTimeout(() => setVisible(false), 6800);
         }
       }, 38);
       return () => clearInterval(interval);
