@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { playTypewriterKey } from "@/lib/taller-audio";
 
 const FRASE =
   "Hace más de dos mil años, en un pequeño taller de Nazaret, un carpintero enseñaba que las grandes obras no comienzan con herramientas… sino con unas manos dispuestas a crear.";
@@ -19,6 +20,11 @@ export function Intro({ onFinish }: IntroProps) {
       const interval = setInterval(() => {
         i++;
         setTyped(FRASE.slice(0, i));
+        const ch = FRASE[i - 1];
+        // click only on visible characters, skip most spaces for natural cadence
+        if (ch && ch !== " " ? true : Math.random() < 0.35) {
+          playTypewriterKey();
+        }
         if (i >= FRASE.length) {
           clearInterval(interval);
           setTimeout(() => setFadeText(true), 2000);
@@ -32,6 +38,7 @@ export function Intro({ onFinish }: IntroProps) {
     }, 1000);
     return () => clearTimeout(startDelay);
   }, [onFinish]);
+
 
   return (
     <AnimatePresence>
