@@ -76,6 +76,7 @@ function Index() {
 
       <BackToTop />
       {introDone && <AudioToggle />}
+      {introDone && entered && <ResetExperience />}
     </main>
   );
 }
