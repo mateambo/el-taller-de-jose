@@ -26,10 +26,10 @@ export const catalogo: Proyecto[] = [
   },
   {
     id: "casita",
-    titulo: "Casita",
+    titulo: "Casita de Nazaret",
     descripcion:
-      "Un pequeño refugio hecho a mano. Aquí la madera aprende a levantar paredes, a sostener un techo, a proteger. Un proyecto que enseña a pensar antes de cortar.",
-    imagen: casita,
+      "Inspirada en la sencillez del hogar de Nazaret, esta casita representa mucho más que una construcción de madera: simboliza el lugar donde crecen la familia, el trabajo y la fe.",
+    imagen: casita.url,
     dificultad: 3,
     tiempo: "2 horas",
     aprendizajes: ["Planificar", "Cortar en ángulo", "Ensamblado limpio", "Acabados"],
