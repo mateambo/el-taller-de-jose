@@ -33,74 +33,86 @@ function startAmbient() {
   const c = ensureCtx();
   if (!c || !master || ambientNodes) return;
 
-  // Brown noise buffer — warm, wood-like room tone
-  const bufferSize = 2 * c.sampleRate;
-  const buffer = c.createBuffer(1, bufferSize, c.sampleRate);
-  const data = buffer.getChannelData(0);
-  let lastOut = 0;
-  for (let i = 0; i < bufferSize; i++) {
-    const white = Math.random() * 2 - 1;
-    lastOut = (lastOut + 0.02 * white) / 1.02;
-    data[i] = lastOut * 3.5;
-  }
-  const noise = c.createBufferSource();
-  noise.buffer = buffer;
-  noise.loop = true;
-
-  const lp = c.createBiquadFilter();
-  lp.type = "lowpass";
-  lp.frequency.value = 420;
-  lp.Q.value = 0.7;
-
-  const hp = c.createBiquadFilter();
-  hp.type = "highpass";
-  hp.frequency.value = 60;
-
   ambientGain = c.createGain();
   ambientGain.gain.value = 0;
 
-  // Deep warm drone
-  const drone = c.createOscillator();
-  drone.type = "sine";
-  drone.frequency.value = 55;
-  const droneGain = c.createGain();
-  droneGain.gain.value = 0.08;
-  drone.connect(droneGain).connect(ambientGain);
-
-  // Slow LFO on brightness to feel alive (wind through window)
-  const lfo = c.createOscillator();
-  lfo.type = "sine";
-  lfo.frequency.value = 0.08;
-  const lfoGain = c.createGain();
-  lfoGain.gain.value = 120;
-  lfo.connect(lfoGain).connect(lp.frequency);
-
-  noise.connect(hp).connect(lp).connect(ambientGain);
+  // Gentle warm lowpass over the whole bed
+  const lp = c.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.frequency.value = 1600;
+  lp.Q.value = 0.4;
+  lp.connect(ambientGain);
   ambientGain.connect(master);
 
-  noise.start();
-  drone.start();
-  lfo.start();
+  // Soft ambient pad — A minor 9 voicing (A2, E3, C4, G4, B4)
+  // Sine waves + slow tremolo per voice for a breathing, meditative feel.
+  const voices = [
+    { freq: 110.0, gain: 0.16, lfo: 0.07 }, // A2
+    { freq: 164.81, gain: 0.11, lfo: 0.05 }, // E3
+    { freq: 261.63, gain: 0.09, lfo: 0.09 }, // C4
+    { freq: 392.0, gain: 0.06, lfo: 0.06 }, // G4
+    { freq: 493.88, gain: 0.045, lfo: 0.08 }, // B4
+  ];
 
-  // fade in
-  ambientGain.gain.linearRampToValueAtTime(BASE_AMBIENT, c.currentTime + 2.5);
+  const stops: Array<() => void> = [];
+
+  voices.forEach((v, idx) => {
+    const osc = c.createOscillator();
+    osc.type = idx === 0 ? "triangle" : "sine";
+    osc.frequency.value = v.freq;
+
+    // subtle detune drift for organic feel
+    const detune = c.createOscillator();
+    detune.type = "sine";
+    detune.frequency.value = 0.05 + Math.random() * 0.08;
+    const detuneGain = c.createGain();
+    detuneGain.gain.value = 3.5;
+    detune.connect(detuneGain).connect(osc.detune);
+
+    const vg = c.createGain();
+    vg.gain.value = 0;
+
+    // slow tremolo LFO on the voice gain
+    const lfo = c.createOscillator();
+    lfo.type = "sine";
+    lfo.frequency.value = v.lfo;
+    const lfoAmp = c.createGain();
+    lfoAmp.gain.value = v.gain * 0.35;
+    lfo.connect(lfoAmp).connect(vg.gain);
+
+    // steady base level for the voice
+    vg.gain.setValueAtTime(v.gain, c.currentTime);
+
+    osc.connect(vg).connect(lp);
+
+    osc.start();
+    detune.start();
+    lfo.start();
+
+    stops.push(() => {
+      try {
+        osc.stop();
+        detune.stop();
+        lfo.stop();
+      } catch {
+        /* noop */
+      }
+    });
+  });
+
+  // slow fade in — musical entrance
+  ambientGain.gain.linearRampToValueAtTime(BASE_AMBIENT, c.currentTime + 4);
 
   ambientNodes = {
     stop: () => {
       try {
         ambientGain?.gain.cancelScheduledValues(c.currentTime);
-        ambientGain?.gain.linearRampToValueAtTime(0, c.currentTime + 0.6);
+        ambientGain?.gain.linearRampToValueAtTime(0, c.currentTime + 1.2);
         setTimeout(() => {
-          try {
-            noise.stop();
-            drone.stop();
-            lfo.stop();
-          } catch {
-            /* noop */
-          }
+          stops.forEach((s) => s());
           ambientNodes = null;
           ambientGain = null;
-        }, 700);
+        }, 1300);
       } catch {
         /* noop */
       }
