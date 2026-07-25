@@ -2,7 +2,13 @@
 @source "../src";
 @import "tw-animate-css";
 
+@theme {
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
 @custom-variant dark (&:is(.dark *));
+
 
 /*
  * Design system definition.
