@@ -7,17 +7,6 @@ interface ProjectRowProps {
   onOpen: (p: Proyecto) => void;
 }
 
-function Stars({ n }: { n: number }) {
-  return (
-    <span className="tracking-[0.3em] text-[#8b5a2b]">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className={i < n ? "text-[#a8703a]" : "opacity-30"}>
-          ★
-        </span>
-      ))}
-    </span>
-  );
-}
 
 export function ProjectRow({ proyecto, index, onOpen }: ProjectRowProps) {
   const imageLeft = index % 2 === 0;
