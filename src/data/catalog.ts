@@ -2,7 +2,6 @@ import cruz from "@/assets/project-cruz.jpg";
 import casita from "@/assets/casita-nazaret-ambientada.jpg.asset.json";
 import banco from "@/assets/project-banco.jpg";
 import cajon from "@/assets/project-cajon.jpg";
-
 export interface Proyecto {
   id: string;
   titulo: string;
@@ -12,13 +11,12 @@ export interface Proyecto {
   tiempo: string;
   aprendizajes: string[];
 }
-
 export const catalogo: Proyecto[] = [
   {
     id: "cruz",
     titulo: "Cruz",
     descripcion:
-      "La primera obra. Dos maderas que se encuentran para recordarnos que las cosas más simples suelen ser las que más nos enseñan. Cortar, lijar y unir con paciencia.",
+      "Dos simples maderas que se encuentran para dar vida al símbolo más grande de amor y esperanza. A lo largo de la historia, la cruz ha recordado que incluso del sacrificio puede brotar la vida. Que esta creación, hecha con tus propias manos, sea también un recordatorio de la fe que sostiene, acompaña y guía cada camino.",
     imagen: cruz,
     dificultad: 1,
     tiempo: "20 minutos",
@@ -28,7 +26,7 @@ export const catalogo: Proyecto[] = [
     id: "casita",
     titulo: "Casita de Nazaret",
     descripcion:
-      "Inspirada en la sencillez del hogar de Nazaret, esta casita representa mucho más que una construcción de madera: simboliza el lugar donde crecen la familia, el trabajo y la fe.",
+      "En una casa sencilla de Nazaret crecieron Jesús, María y José. Entre paredes humildes se aprendió el valor del trabajo, el amor compartido y la presencia de Dios en la vida cotidiana. Esta pequeña casita nos recuerda que un hogar no se mide por su tamaño, sino por el amor que habita en él.",
     imagen: casita.url,
     dificultad: 3,
     tiempo: "2 horas",
@@ -38,7 +36,7 @@ export const catalogo: Proyecto[] = [
     id: "banco",
     titulo: "Banco",
     descripcion:
-      "Un banco es una invitación a sentarse, a mirar, a descansar. Construir uno es aprender que la madera puede sostenernos si la trabajamos con calma y respeto.",
+      "Un banco es mucho más que un lugar para sentarse. Es el espacio donde nacen las conversaciones, donde se comparten silencios y donde el descanso encuentra su lugar. Que esta sencilla creación nos recuerde que siempre vale la pena hacer una pausa para encontrarnos con los demás y con Dios.",
     imagen: banco,
     dificultad: 2,
     tiempo: "1 hora",
@@ -48,7 +46,7 @@ export const catalogo: Proyecto[] = [
     id: "cajon",
     titulo: "Cajón Multiuso",
     descripcion:
-      "Las grandes creaciones comienzan dominando lo esencial. Este cajón es un proyecto simple, útil y versátil. Una vez terminado, podrá utilizarse para guardar herramientas, materiales o cualquier objeto que necesite un lugar.",
+      "Un pequeño cajón de madera pensado para llevar con vos aquello que más valorás. Una invitación a tener siempre cerca eso que da sentido a nuestro camino y nos recuerda lo verdaderamente importante.",
     imagen: cajon,
     dificultad: 2,
     tiempo: "1 hora 30 minutos",
