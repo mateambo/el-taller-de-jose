@@ -33,6 +33,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [introStarted, setIntroStarted] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const [entered, setEntered] = useState(false);
   const [showRest, setShowRest] = useState(false);
@@ -43,7 +44,7 @@ function Index() {
     setEntered(true);
     setShowRest(true);
     playHammerKnock();
-    tryStartAmbient(); // start ambient workshop tone after user gesture
+    tryStartAmbient();
     duckAmbient(2200);
     setTimeout(() => {
       catalogRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -56,9 +57,19 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-[#1a0f06] text-[#3a2415]">
-      {!introDone && <Intro onFinish={() => setIntroDone(true)} />}
+      {!introDone && (
+        <Intro
+          onStartHeroReveal={() => setIntroStarted(true)}
+          onFinish={() => setIntroDone(true)}
+        />
+      )}
 
-      <Hero entered={entered} onEnter={handleEnter} />
+      <Hero
+        entered={entered}
+        onEnter={handleEnter}
+        isRevealing={introStarted}
+        isFullyVisible={introDone}
+      />
 
       <AnimatePresence>
         {showRest && (
@@ -80,4 +91,3 @@ function Index() {
     </main>
   );
 }
-
