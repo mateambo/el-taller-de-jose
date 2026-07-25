@@ -7,8 +7,12 @@ export function AudioToggle() {
 
   useEffect(() => {
     setOn(isAudioEnabled());
-    return subscribeAudio(setOn);
+    const unsub = subscribeAudio(setOn);
+    return () => {
+      unsub();
+    };
   }, []);
+
 
   return (
     <motion.button
