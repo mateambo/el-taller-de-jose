@@ -46,13 +46,14 @@ export function Intro({ onFinish }: IntroProps) {
       {visible && (
         <motion.div
           initial={{ opacity: 1 }}
+          animate={{ opacity: fadeText ? 0 : 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.6, ease: "easeInOut" }}
+          transition={{ duration: 3.2, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black px-6"
         >
           <motion.p
             animate={{ opacity: fadeText ? 0 : 1 }}
-            transition={{ duration: 1.6, ease: "easeInOut" }}
+            transition={{ duration: 2.2, ease: "easeInOut" }}
             className="font-serif max-w-3xl text-center text-lg leading-relaxed tracking-wide text-[#d9c8a8] md:text-2xl md:leading-relaxed"
           >
             {typed}
