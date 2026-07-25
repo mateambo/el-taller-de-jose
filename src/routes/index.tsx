@@ -6,6 +6,8 @@ import { Hero } from "@/components/taller/Hero";
 import { Catalog } from "@/components/taller/Catalog";
 import { FinalSection } from "@/components/taller/FinalSection";
 import { BackToTop } from "@/components/taller/BackToTop";
+import { AudioToggle } from "@/components/taller/AudioToggle";
+import { duckAmbient, playHammerKnock, tryStartAmbient } from "@/lib/taller-audio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,31 +41,12 @@ function Index() {
     if (entered) return;
     setEntered(true);
     setShowRest(true);
+    playHammerKnock();
+    tryStartAmbient(); // start ambient workshop tone after user gesture
+    duckAmbient(2200);
     setTimeout(() => {
       catalogRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 900);
-
-    // Subtle hammer knock (generated tone) after user interaction
-    try {
-      const AudioCtx =
-        window.AudioContext ||
-        (window as unknown as { webkitAudioContext: typeof AudioContext })
-          .webkitAudioContext;
-      const ctx = new AudioCtx();
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = "triangle";
-      o.frequency.setValueAtTime(140, ctx.currentTime);
-      o.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.18);
-      g.gain.setValueAtTime(0.0001, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + 0.005);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
-      o.connect(g).connect(ctx.destination);
-      o.start();
-      o.stop(ctx.currentTime + 0.4);
-    } catch {
-      /* audio not available */
-    }
   };
 
   useEffect(() => {
@@ -91,6 +74,8 @@ function Index() {
       </AnimatePresence>
 
       <BackToTop />
+      {introDone && <AudioToggle />}
     </main>
   );
 }
+
