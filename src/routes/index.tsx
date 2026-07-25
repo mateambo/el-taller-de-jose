@@ -7,6 +7,7 @@ import { Catalog } from "@/components/taller/Catalog";
 import { FinalSection } from "@/components/taller/FinalSection";
 import { BackToTop } from "@/components/taller/BackToTop";
 import { AudioToggle } from "@/components/taller/AudioToggle";
+import { ResetExperience } from "@/components/taller/ResetExperience";
 import { duckAmbient, playHammerKnock, tryStartAmbient } from "@/lib/taller-audio";
 
 export const Route = createFileRoute("/")({
