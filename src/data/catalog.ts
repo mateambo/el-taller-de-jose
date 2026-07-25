@@ -1,5 +1,5 @@
 import cruz from "@/assets/project-cruz.jpg";
-import casita from "@/assets/project-casita.jpg";
+import casita from "@/assets/casita-nazaret.png.asset.json";
 import banco from "@/assets/project-banco.jpg";
 import cajon from "@/assets/project-cajon.jpg";
 
@@ -26,10 +26,10 @@ export const catalogo: Proyecto[] = [
   },
   {
     id: "casita",
-    titulo: "Casita",
+    titulo: "Casita de Nazaret",
     descripcion:
-      "Un pequeño refugio hecho a mano. Aquí la madera aprende a levantar paredes, a sostener un techo, a proteger. Un proyecto que enseña a pensar antes de cortar.",
-    imagen: casita,
+      "Inspirada en la sencillez del hogar de Nazaret, esta casita representa mucho más que una construcción de madera: simboliza el lugar donde crecen la familia, el trabajo y la fe.",
+    imagen: casita.url,
     dificultad: 3,
     tiempo: "2 horas",
     aprendizajes: ["Planificar", "Cortar en ángulo", "Ensamblado limpio", "Acabados"],
@@ -46,9 +46,9 @@ export const catalogo: Proyecto[] = [
   },
   {
     id: "cajon",
-    titulo: "Cajón",
+    titulo: "Cajón Multiuso",
     descripcion:
-      "Guardar es también un arte. Este cajón enseña que cada tabla tiene su lugar exacto y que un objeto útil puede ser, además, hermoso.",
+      "Las grandes creaciones comienzan dominando lo esencial. Este cajón es un proyecto simple, útil y versátil. Una vez terminado, podrá utilizarse para guardar herramientas, materiales o cualquier objeto que necesite un lugar.",
     imagen: cajon,
     dificultad: 2,
     tiempo: "1 hora 30 minutos",
