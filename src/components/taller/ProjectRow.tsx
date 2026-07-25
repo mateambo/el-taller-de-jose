@@ -7,17 +7,6 @@ interface ProjectRowProps {
   onOpen: (p: Proyecto) => void;
 }
 
-function Stars({ n }: { n: number }) {
-  return (
-    <span className="tracking-[0.3em] text-[#8b5a2b]">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className={i < n ? "text-[#a8703a]" : "opacity-30"}>
-          ★
-        </span>
-      ))}
-    </span>
-  );
-}
 
 export function ProjectRow({ proyecto, index, onOpen }: ProjectRowProps) {
   const imageLeft = index % 2 === 0;
@@ -68,37 +57,6 @@ export function ProjectRow({ proyecto, index, onOpen }: ProjectRowProps) {
           {proyecto.descripcion}
         </p>
 
-        <div className="grid max-w-md grid-cols-2 gap-6 border-y border-[#c9a875]/40 py-6">
-          <div>
-            <p className="mb-1 font-sans text-[0.6rem] uppercase tracking-[0.3em] text-[#8b5a2b]">
-              Tiempo
-            </p>
-            <p className="font-serif text-base text-[#3a2415]">{proyecto.tiempo}</p>
-          </div>
-          <div>
-            <p className="mb-1 font-sans text-[0.6rem] uppercase tracking-[0.3em] text-[#8b5a2b]">
-              Dificultad
-            </p>
-            <Stars n={proyecto.dificultad} />
-          </div>
-        </div>
-
-        <div>
-          <p className="mb-3 font-sans text-[0.6rem] uppercase tracking-[0.3em] text-[#8b5a2b]">
-            Aprenderás
-          </p>
-          <ul className="space-y-2">
-            {proyecto.aprendizajes.map((a) => (
-              <li
-                key={a}
-                className="flex items-center gap-3 font-serif text-base text-[#3a2415]"
-              >
-                <span className="text-[#a8703a]">✓</span>
-                {a}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </motion.article>
   );
