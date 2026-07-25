@@ -8,8 +8,8 @@ let ambientGain: GainNode | null = null;
 let enabled = false;
 let listeners = new Set<(on: boolean) => void>();
 
-const BASE_AMBIENT = 0.09; // very subtle baseline
-const DUCKED_AMBIENT = 0.035;
+const BASE_AMBIENT = 0.12; // very subtle baseline
+const DUCKED_AMBIENT = 0.045;
 
 function ensureCtx(): AudioContext | null {
   if (typeof window === "undefined") return null;
