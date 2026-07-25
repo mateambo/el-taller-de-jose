@@ -46,9 +46,9 @@ export const catalogo: Proyecto[] = [
   },
   {
     id: "cajon",
-    titulo: "Cajón",
+    titulo: "Cajón Multiuso",
     descripcion:
-      "Guardar es también un arte. Este cajón enseña que cada tabla tiene su lugar exacto y que un objeto útil puede ser, además, hermoso.",
+      "Las grandes creaciones comienzan dominando lo esencial. Este cajón es un proyecto simple, útil y versátil. Una vez terminado, podrá utilizarse para guardar herramientas, materiales o cualquier objeto que necesite un lugar.",
     imagen: cajon,
     dificultad: 2,
     tiempo: "1 hora 30 minutos",
