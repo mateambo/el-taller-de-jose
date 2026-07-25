@@ -1,5 +1,5 @@
 import cruz from "@/assets/project-cruz.jpg";
-import casita from "@/assets/project-casita.jpg";
+import casita from "@/assets/casita-nazaret.png.asset.json";
 import banco from "@/assets/project-banco.jpg";
 import cajon from "@/assets/project-cajon.jpg";
 
