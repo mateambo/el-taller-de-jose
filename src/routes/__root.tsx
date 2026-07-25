@@ -77,6 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "El Taller de José — Una experiencia inmersiva de carpintería" },
+      { property: "og:title", content: "El Taller de José — Una experiencia inmersiva de carpintería" },
+      { name: "twitter:title", content: "El Taller de José — Una experiencia inmersiva de carpintería" },
+      { name: "description", content: "Entrá al taller de José en Nazaret. Una experiencia cinematográfica que invita a construir con las manos y con el corazón." },
+      { property: "og:description", content: "Entrá al taller de José en Nazaret. Una experiencia cinematográfica que invita a construir con las manos y con el corazón." },
+      { name: "twitter:description", content: "Entrá al taller de José en Nazaret. Una experiencia cinematográfica que invita a construir con las manos y con el corazón." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/77ae6ca2-630e-47cd-a788-8e8c75c0bd9b/id-preview-72a7a0b8--a3e6ddc8-ae9e-4de0-baab-7b4d0fbe2c60.lovable.app-1784997712461.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/77ae6ca2-630e-47cd-a788-8e8c75c0bd9b/id-preview-72a7a0b8--a3e6ddc8-ae9e-4de0-baab-7b4d0fbe2c60.lovable.app-1784997712461.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

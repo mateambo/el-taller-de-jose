@@ -19,11 +19,11 @@ export const Route = createFileRoute("/")({
         content:
           "Entrá al taller de José en Nazaret. Una experiencia cinematográfica que invita a construir con las manos y con el corazón.",
       },
-      { property: "og:title", content: "El Taller de José" },
+      { property: "og:title", content: "El Taller de José — Una experiencia inmersiva de carpintería" },
       {
         property: "og:description",
         content:
-          "Cada corte enseña paciencia. Cada creación habla de quien la construyó.",
+          "Entrá al taller de José en Nazaret. Una experiencia cinematográfica que invita a construir con las manos y con el corazón.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
