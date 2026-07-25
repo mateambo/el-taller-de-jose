@@ -27,11 +27,12 @@ export function Intro({ onFinish }: IntroProps) {
         }
         if (i >= FRASE.length) {
           clearInterval(interval);
-          setTimeout(() => setFadeText(true), 2000);
-          setTimeout(() => {
-            setVisible(false);
-            onFinish();
-          }, 4200);
+          // Let the phrase breathe, then start a long cross-fade to the hero.
+          setTimeout(() => setFadeText(true), 2200);
+          // Reveal hero earlier so black overlay fades ON TOP of the image
+          setTimeout(() => onFinish(), 3600);
+          // Overlay itself unmounts after its own long fade completes
+          setTimeout(() => setVisible(false), 6800);
         }
       }, 38);
       return () => clearInterval(interval);
@@ -45,13 +46,14 @@ export function Intro({ onFinish }: IntroProps) {
       {visible && (
         <motion.div
           initial={{ opacity: 1 }}
+          animate={{ opacity: fadeText ? 0 : 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.6, ease: "easeInOut" }}
+          transition={{ duration: 3.2, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black px-6"
         >
           <motion.p
             animate={{ opacity: fadeText ? 0 : 1 }}
-            transition={{ duration: 1.6, ease: "easeInOut" }}
+            transition={{ duration: 2.2, ease: "easeInOut" }}
             className="font-serif max-w-3xl text-center text-lg leading-relaxed tracking-wide text-[#d9c8a8] md:text-2xl md:leading-relaxed"
           >
             {typed}
